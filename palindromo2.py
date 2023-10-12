@@ -1,36 +1,34 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct 11 17:44:19 2023
+"""Programa com ajuda do chat GPT"""
 
-@author: Matheus
-"""
+def eh_palindromo(num):
+    return str(num) == str(num)[::-1]
 
-def e_palindrome(number):
-    return str(number) == str(number)[::-1]
+def encontrar_maior_palindromo(num1, num2):
+    maior_palindromo = 0
 
-def encontre_o_maior(num1, num2):
-    if num1 < 1000 or num1 > 9999 or num2 < 1000 or num2 > 9999:
-        raise ValueError("Ambos os números devem ter 4 dígitos")
-
-    maior = 0
-    for i in range(num1, num2, -1):
-        for j in range(num1, num2, -1):
+    for i in range(num1, num1 + 10000):
+        for j in range(num2, num2 + 10000):
             produto = i * j
-            if e_palindrome(produto) and produto > maior:
-                maior = produto
-    return maior
+            if eh_palindromo(produto) and produto > maior_palindromo:
+                maior_palindromo = produto
+
+    return maior_palindromo
+
 try:
-    # Fornecer os dois números com 4 dígitos
-    numero1 = int(input("Digite o primeiro número com 4 dígitos: "))
-    numero2 = int(input("Digite o segundo número com 4 dígitos: "))
+    # Solicitar ao usuário para inserir os dois números de quatro dígitos
+    num1 = int(input("Digite o primeiro número de quatro dígitos: "))
+    num2 = int(input("Digite o segundo número de quatro dígitos: "))
 
-    resultado = encontre_o_maior(numero1, numero2)
-    if resultado == 0:
-        print("Não existem palindromos com a multiplicação desses dois números")
+    maior_palindromo = encontrar_maior_palindromo(num1, num2)
+
+    if maior_palindromo != 0:
+        print(f"O maior palíndromo na multiplicação de {num1} e {num2} é: {maior_palindromo}")
     else:
-        print(f"O maior palíndromo entre {numero1} e {numero2} é: {resultado}")
+        print(f"Não foi encontrado nenhum palíndromo na multiplicação de {num1} e {num2}.")
 
-except ValueError as e:
-    print(f"Erro: {e}")
+except ValueError:
+    print("Por favor, insira números válidos.")
 except Exception as e:
-    print(f"Erro inesperado: {e}")
+    print(f"Ocorreu um erro: {e}")
+finally:
+    print("Programa encerrado.")
